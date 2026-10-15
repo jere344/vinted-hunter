@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vinted_hunter"
+version = "0.1.0"
+description = "Local web app that hunts Vinted listings for the best value, using Claude to identify products."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "ByGourou"}]
+keywords = ["vinted", "marketplace", "price-comparison", "claude", "anthropic", "fastapi"]
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Framework :: FastAPI",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "pydantic>=2.7",
+    "curl_cffi>=0.13",
+    "anthropic>=1.13",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+    "httpx>=0.27",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+vinted-hunter = "vinted_hunter.app:main"
+
+[project.urls]
+Homepage = "https://github.com/jere344/vinted-hunter"
+Issues = "https://github.com/jere344/vinted-hunter/issues"
+Changelog = "https://github.com/jere344/vinted-hunter/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+include = ["vinted_hunter*"]
+
+[tool.setuptools.package-data]
+vinted_hunter = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = ["live: hits the real vinted.fr over the network (skipped by default; run with -m live)"]
+addopts = "-m 'not live'"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+# Long lines are common in prompt text and URLs; the formatter width above still applies.
+ignore = ["E501"]

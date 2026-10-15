@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vinted Hunter</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">VH</span>
+      <div>
+        <h1>Vinted Hunter</h1>
+        <p class="muted">Best value on vinted.fr, checked by Claude</p>
+      </div>
+    </div>
+  </header>
+
+  <div id="key-banner" class="banner" hidden></div>
+
+  <main class="layout">
+    <section class="panel main-col">
+      <form id="hunt-form" class="hunt-form" autocomplete="off">
+        <label class="field">
+          <span>What are you looking for?</span>
+          <textarea id="request" rows="2" maxlength="500" required
+            placeholder="ex : appareil photo reflex, bon état, moins de 200 €"></textarea>
+        </label>
+        <div class="form-row">
+          <label class="field budget">
+            <span>Budget (EUR)</span>
+            <input id="budget" type="number" min="1" max="100000" step="1" value="50" required>
+          </label>
+          <button id="submit" type="submit" class="primary">Hunt</button>
+        </div>
+        <details class="advanced">
+          <summary>Advanced</summary>
+          <div class="form-row">
+            <label class="field">
+              <span>Max listings to inspect</span>
+              <input id="max-detailed" type="number" min="1" max="60" step="1" placeholder="default">
+            </label>
+            <label class="field">
+              <span>Search pages per query</span>
+              <input id="search-pages" type="number" min="1" max="5" step="1" placeholder="default">
+            </label>
+          </div>
+        </details>
+      </form>
+
+      <section id="progress" class="progress" hidden aria-live="polite">
+        <ol id="stepper" class="stepper"></ol>
+        <p id="progress-note" class="muted"></p>
+        <details class="log-wrap" open>
+          <summary>Live log</summary>
+          <ul id="log" class="log"></ul>
+        </details>
+      </section>
+
+      <section id="results" class="results" hidden>
+        <div class="results-head">
+          <h2>Results</h2>
+          <p id="results-summary" class="muted"></p>
+        </div>
+        <div id="plan" class="plan" hidden></div>
+        <div id="warnings" class="warnings" hidden></div>
+        <div id="cards" class="cards"></div>
+        <p id="no-results" class="muted" hidden>No listing survived the filters. Check the rejected list below for reasons.</p>
+        <details id="rejected-wrap" class="rejected">
+          <summary>Rejected <span id="rejected-count"></span></summary>
+          <ul id="rejected-list" class="rejected-list"></ul>
+        </details>
+        <p id="cost" class="cost muted"></p>
+      </section>
+    </section>
+
+    <aside class="panel side-col">
+      <h2>Past hunts</h2>
+      <p id="history-empty" class="muted" hidden>No saved hunts yet.</p>
+      <ul id="history" class="history"></ul>
+    </aside>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

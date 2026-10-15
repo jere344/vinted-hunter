@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+data/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Personal workflow files (kept on disk, not published)
+HANDOFF.md
+CLAUDE.md
+.claude/
+
+# Tooling and editor artifacts
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+.DS_Store
+.idea/
+.vscode/
